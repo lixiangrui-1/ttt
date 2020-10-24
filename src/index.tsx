@@ -1,17 +1,23 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./layout/app/app";
+import { BrowserRouter as Router } from "react-router-dom";
+import store from "../src/stort/index";
+import { Provider } from "react-redux";
+import { UPDATA_LOGIN } from "./stort/consts";
+
+const state = window.localStorage.getItem("state");
+if (state) {
+  let data = JSON.parse(state);
+  store.dispatch({ type: UPDATA_LOGIN, data: data });
+}
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+  <Provider store={store}>
+    <Router>
+      <App />
+    </Router>
+  </Provider>,
+  document.getElementById("root")
 );
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();

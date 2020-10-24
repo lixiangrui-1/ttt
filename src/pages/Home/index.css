@@ -1,0 +1,42 @@
+.InputTop {
+  width: 90%;
+  outline: none;
+  color: #000;
+  height: 28px;
+  font-size: 15px;
+  border-radius: 0.05rem;
+  text-align: center;
+  background-color: transparent;
+  border: 1px solid #108ee9;
+  margin: 0 5%;
+  margin-top: 0.1rem;
+}
+
+.goodsNav {
+  height: 0.7rem;
+  width: 100%;
+  padding: 0.1rem;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+.goodsNavone {
+  width: 0.44rem;
+  height: 0.48rem;
+}
+.goodsBox > img {
+  height: 0.38rem;
+  width: 100%;
+  margin-top: 0.05rem;
+}
+.goodsBox::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.text-bottom {
+  text-align: center;
+  margin: 0.05rem 0;
+}

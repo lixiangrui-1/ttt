@@ -1,0 +1,13 @@
+.login {
+  padding: 10px 15px;
+}
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 42px;
+  width: 100%;
+}
+.btn > button {
+  margin: 0 10px;
+}

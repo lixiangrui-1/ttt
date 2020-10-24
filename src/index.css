@@ -1,13 +1,26 @@
+html {
+  font-size: 26.66vw;
+}
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: cursive;
+  font-size: 20px;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
 }
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+* {
+  margin: 0;
+  padding: 0;
+}
+a {
+  text-decoration: none;
+}
+.context {
+  position: absolute;
+  width: 100%;
+  top: 0.48rem;
+  bottom: 0.5rem;
+  background-color: #f6f6f6;
+  overflow: auto;
 }

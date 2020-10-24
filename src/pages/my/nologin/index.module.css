@@ -1,0 +1,11 @@
+.text {
+  height: 0.4rem;
+  text-align: center;
+  line-height: 0.4rem;
+}
+.btn {
+  height: 0.4rem;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}

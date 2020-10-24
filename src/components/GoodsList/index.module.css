@@ -1,0 +1,25 @@
+.list {
+  border-radius: 0.15rem;
+  padding: 0.026rem;
+  background-color: #fff;
+}
+.list img {
+  width: 0.9rem;
+  height: 0.9rem;
+  margin: 0 auto;
+  display: block;
+}
+.list h4 {
+  font-size: 0.13rem;
+  color: #333;
+  padding: 0.1rem 0.05rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-indent: 0.5em;
+}
+.list p {
+  font-size: 0.13rem;
+  color: red;
+  text-indent: 1em;
+}

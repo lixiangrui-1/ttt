@@ -1,0 +1,11 @@
+.btn {
+  outline: none;
+  border: none;
+  background-color: #108ee9;
+  width: 80px;
+  height: 30px;
+  display: block;
+  border-radius: 5px;
+  color: #fff;
+  z-index: 9;
+}

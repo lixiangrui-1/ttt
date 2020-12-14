@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /**
+       * 基于实dom的虚拟dom
+       * @method RcreateElement
+       * @param {ele:string,obj:Object,option:Array}
+       * ele 标签名 obj 标签中的属性 option 标签中的文本或另一个Vdom
+       * @return {jsx} 结构与虚拟dom一致的真实dom
+       */
+      function RcreateElement(ele, obj, ...option) {
+        let handler = {
+          get(target, key) {
+            let dom = document.createElement(key);
+            return function (obj, ...childrem) {
+              for (let item in obj) {
+                if (
+                  //返回字符串前2位 判断key是否为on开头并判断val的类型是否为Function
+                  item.substring(0, 2) === "on" &&
+                  obj[item].constructor === Function
+                ) {
+                  //当判断确定为事件是绑定dom2
+                  dom.addEventListener(item.slice(2, item.length), obj[item]);
+                } else {
+                  //判断传入的对象是否为样式
+                  if (item + "" === "style") {
+                    //提取style的属性值{}
+                    let value = obj[item];
+                    for (key in value) {
+                      //遍历style对象
+                      //判断是否为驼峰命名如果是对驼峰命名做相应处理
+                      if (/[A-Z]/.test(key)) {
+                        //利用正则匹配驼峰命名并在大写字母前加连字符适配css属性
+                        let keyNext = key
+                          .replace(/([A-Z])/g, "-$1")
+                          .toLowerCase();
+                        dom.style.cssText += `${keyNext}:${value[key]}`;
+                      }
+                      //如果只是一般样式则直接添加
+                      dom.style.cssText += `${key}:${value[key]}`;
+                    }
+                  } else {
+                    //如果不是样式则直接渲染属性
+                    dom.setAttribute(item, obj[item]);
+                  }
+                }
+              }
+              for (let val of childrem) {
+                if (typeof val === "number" || typeof val === "string") {
+                  val = document.createTextNode(val);
+                  dom.appendChild(val);
+                } else if (Array.isArray(val)) {
+                  val.map(item => {
+                    dom.appendChild(item);
+                  });
+                } else {
+                  dom.appendChild(val);
+                }
+              }
+              return dom;
+            };
+          },
+        };
+        let vDom = new Proxy({}, handler);
+        return vDom[ele](obj, ...option);
+      }
+      let a = RcreateElement(
+        "div",
+        {
+          onclick: function () {
+            console.log(123);
+          },
+          class: "inter",
+          style: {
+            background: "red",
+            color: "blue",
+            width: "200px",
+            height: "200px",
+            textAlign: "center",
+            lineHeight: "200px",
+            border: "1px solid red",
+          },
+        },
+        RcreateElement(
+          "p",
+          {
+            style: {
+              background: "green",
+              width: "150px",
+              height: "150px",
+              margin: "25px auto",
+              textAlign: "center",
+              lineHeight: "150px",
+            },
+          },
+
+          [
+            RcreateElement("div", {}, 123),
+            RcreateElement("div", {}, 123),
+            RcreateElement("div", {}, 123),
+          ],
+        ),
+      );
+      document.body.appendChild(a);
+    </script>
+  </body>
+</html>
